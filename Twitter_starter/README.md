@@ -25,3 +25,4 @@ Here's a walkthrough of implemented user stories:
 
 <a href="https://imgur.com/oUooSsv"><img src="https://i.imgur.com/oUooSsv.gif" title="source: imgur.com" /></a>
 
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
