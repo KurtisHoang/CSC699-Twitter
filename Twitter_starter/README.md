@@ -24,6 +24,6 @@ The following **bonus** features are implemented:
 Here's a walkthrough of implemented user stories:
 
 <a href="https://imgur.com/oUooSsv"><img src="https://i.imgur.com/oUooSsv.gif" title="source: imgur.com" /></a>
-![](https://i.imgur.com/oUooSsv.gif)
+![]https://i.imgur.com/oUooSsv.gif
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
