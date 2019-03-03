@@ -18,11 +18,25 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
         let requestToken = BDBOAuth1Credential(queryString: url.query)
         TwitterAPICaller.client?.fetchAccessToken(withPath: "oauth/access_token", method: "POST", requestToken: requestToken, success: { (accessToken: BDBOAuth1Credential!) in
             self.loginSuccess?()
+            if let token = accessToken {
+
+                //print("Got access token")
+                let userUrl = "https://api.twitter.com/1.1/account/verify_credentials.json"
+                TwitterAPICaller.client?.get(userUrl, parameters: nil, success: { (request: URLSessionDataTask?, response: Any?) in
+                    //print("Fetching user succeeded, Twitter authentication success.")
+                    let dictionary = response as! NSDictionary
+//                    let user = User(dict: dictionary)
+                    User.current_User = User(dict: dictionary)
+                    
+                }, failure: { (request: URLSessionDataTask?, error: Error) in
+                    print("failed to fetch user")
+                })
+            }
         }, failure: { (error: Error!) in
             self.loginFailure?(error)
         })
     }
-    
+ 
     func login(url: String, success: @escaping () -> (), failure: @escaping (Error) -> ()){
         loginSuccess = success
         loginFailure = failure
@@ -37,6 +51,7 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
     }
     func logout (){
         deauthorize()
+        User.current_User = nil
     }
     
     func getDictionaryRequest(url: String, parameters: [String:Any], success: @escaping (NSDictionary) -> (), failure: @escaping (Error) -> ()){
@@ -100,4 +115,5 @@ class TwitterAPICaller: BDBOAuth1SessionManager {
             failure(error)
         })
     }
+    
 }
